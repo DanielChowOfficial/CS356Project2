@@ -5,8 +5,8 @@ public class Group extends UserComposite{
 	boolean allowsChildren = true;
 	public Group(String id){
 		 children = new HashMap<String, UserComposite>();
+		 creationTime = System.currentTimeMillis();
 		this.id = id;
-		
 		
 	}
 	@Override

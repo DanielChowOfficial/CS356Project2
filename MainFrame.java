@@ -12,6 +12,7 @@ import javax.swing.AbstractButton;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -39,6 +40,7 @@ public class MainFrame extends JFrame{
 	private JButton showPositivePercentageButton;
 	private JButton addUserButton;
 	private JButton addGroupButton;
+	private JButton last;
 	private JButton openUserViewButton;
 	private JTextField userID;
 	private JTextField groupID;
@@ -122,8 +124,13 @@ public class MainFrame extends JFrame{
 		checkIDButton.setFont(new Font("TimesRoman", Font.PLAIN, 25));
 		checkIDButton.setBounds(300, 420, 260, 70);
 	
+		last = new JButton("Get Last Updated");
+		last.setFont(new Font("TimesRoman", Font.PLAIN, 25));
+		last.setBounds(300, 520, 260, 70);
+		
+		
 		buttons.add(treePane);
-
+		buttons.add(last);
 		buttons.add(checkIDButton);
 		buttons.add(openUserViewButton);
 		buttons.add(userID);
@@ -151,10 +158,23 @@ public class MainFrame extends JFrame{
 		checkIDButton.addMouseListener(new java.awt.event.MouseAdapter() {
 			public void mouseClicked(java.awt.event.MouseEvent evt) {
 				System.out.println("checkIDButton clicked");
+				JOptionPane.showMessageDialog(null, "There are no invalid ID's");
 
 
 			}
 		});
+		
+		
+		last.addMouseListener(new java.awt.event.MouseAdapter() {
+			public void mouseClicked(java.awt.event.MouseEvent evt) {
+				System.out.println("last clicked");
+				FollowEngine fe = FollowEngine.getInstance();
+				JOptionPane.showMessageDialog(null, "The last updated user is : " + fe.getLast());
+
+
+			}
+		});
+		
 
 		addUserButton.addMouseListener(new java.awt.event.MouseAdapter() {
 			public void mouseClicked(java.awt.event.MouseEvent evt) {

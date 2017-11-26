@@ -6,6 +6,8 @@ public abstract class UserComposite extends DefaultMutableTreeNode {
 	protected HashMap<String, UserComposite> children;
 	protected String id;
 	private Group parent;
+	protected long creationTime;
+	protected long lastUpdate;
 	public HashMap<String, UserComposite> getChildren(){
 		return children;
 	}
@@ -15,6 +17,12 @@ public abstract class UserComposite extends DefaultMutableTreeNode {
 	}
 	public void setID(String id) {
 		this.id = id;
+	}
+	public double getCreationTime(){
+		return creationTime;
+	}
+	public double getLasteUpdatedTime(){
+		return lastUpdate;
 	}
 	
 	

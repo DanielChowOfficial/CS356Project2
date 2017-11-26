@@ -5,6 +5,7 @@ public class FollowEngine {
 	private static FollowEngine instance;
 	Map<String, UserComposite> users;
 	private int count;
+	private String last = null;
 	private int groupCount;
 	private FollowEngine(){
 		count = 0;
@@ -18,7 +19,12 @@ public class FollowEngine {
 		}
 		return instance;
 	}
-	
+	public void setLast(String last){
+		this.last = last;
+	}
+	public String getLast(){
+		return last;
+	}
 	public void addUser(UserComposite temp){
 		if(temp.getAllowsChildren() == false){
 			count++;

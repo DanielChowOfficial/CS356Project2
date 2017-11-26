@@ -19,6 +19,8 @@ public class User extends UserComposite{
 		inGroup = false;
 		newsFeed = new ArrayList<String>();
 		allowsChildren = false;
+		creationTime = System.currentTimeMillis();
+		lastUpdate = System.currentTimeMillis();
 		
 		
 	}
@@ -31,6 +33,10 @@ public class User extends UserComposite{
 	protected void tweet(String twt){
 		Observer nfo = NewsFeedObserver.getInstance();
 		nfo.update(this, twt);
+		lastUpdate = System.currentTimeMillis();
+		FollowEngine fe = FollowEngine.getInstance();
+		fe.setLast(this.id);
+		System.out.println("id set" + this.id);
 
 		
 	}

@@ -6,6 +6,7 @@ import java.util.Set;
 import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
@@ -26,6 +27,8 @@ public class UserFrame extends JFrame{
 	User user;
 	private JTextField userID;
 	private JTextField tweetMessage;
+	private JLabel creationT;
+	private JLabel updateT;
 	private JButton followButton;
 	private JButton tweetButton;
 
@@ -97,9 +100,18 @@ public class UserFrame extends JFrame{
 		buttons.add(newsFeedScrollPane);
 
 		userID = new JTextField();
+		
 		userID.setText("user to follow");
 		userID.setBounds(450, 10, 100, 20);
 		userID.setFont(new Font("TimesRoman", Font.PLAIN, 12));
+		creationT = new JLabel();
+		creationT.setText("user created at " + user.getCreationTime());
+		creationT.setBounds(10, 600, 600, 20);
+		creationT.setFont(new Font("TimesRoman", Font.PLAIN, 12));
+		updateT = new JLabel();
+		updateT.setText("last updated at " + user.getLasteUpdatedTime());
+		updateT.setBounds(10, 550, 600, 20);
+		updateT.setFont(new Font("TimesRoman", Font.PLAIN, 12));
 		tweetMessage = new JTextField();
 		tweetMessage.setFont(new Font("TimesRoman", Font.PLAIN, 12));
 		tweetMessage.setText("String to tweet");
@@ -115,6 +127,7 @@ public class UserFrame extends JFrame{
 		buttons.add(tweetMessage);
 		buttons.add(tweetButton);
 		buttons.add(followButton);
+		buttons.add(creationT);
 		add(buttons);
 		initListeners();
 		setVisible(true);
@@ -131,6 +144,9 @@ public class UserFrame extends JFrame{
 		tweetButton.addMouseListener(new java.awt.event.MouseAdapter() {
 			public void mouseClicked(java.awt.event.MouseEvent evt) {
 				System.out.println("tweetButton clicked");
+				FollowEngine fe = FollowEngine.getInstance();
+				fe.setLast(user.id);
+				System.out.println("id set" + user.id);
 				NewsFeedObserver.getInstance().update(user, tweetMessage.getText());
 				for (String key : user.getFollowers().keySet()) {
 					if(MainFrame.getUserFrames().containsKey(key)){
